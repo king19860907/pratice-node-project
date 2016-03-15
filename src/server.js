@@ -6,7 +6,8 @@
 import path from 'path';
 import ProjectCore from 'project-core';
 
-const $ = new ProjectCore();
+//设置全局变量$
+const $ = global.$ = new ProjectCore();
 
 //加载配置文件
 $.init.add((done)=>{
@@ -21,6 +22,10 @@ $.init.add((done)=>{
     done();
 });
 
+//初始化mongodb
+$.init.load(path.resolve(__dirname,'init','mongodb.js'));
+$.init.load(path.resolve(__dirname,'models'))
+
 //初始化
 $.init((err)=>{
     if(err){
@@ -29,4 +34,12 @@ $.init((err)=>{
     }else{
         console.log('inited [env=%s]',$.env);
     }
+
+
+    const user =  $.model.User({
+        name:"majun2",
+        password:"123456",
+        nickname:'majun2',
+    });
+    user.save(console.log);
 });
