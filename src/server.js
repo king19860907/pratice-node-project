@@ -1,4 +1,4 @@
-'use strcit'
+'use strict'
 /**
  * Created by jun_ma on 2016/3/15.
  */
