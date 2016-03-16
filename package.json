@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "npm run clean && babel src -d target --watch",
     "compile": "npm run clean && babel src -d target",
-    "clean": "DEL target"
+    "clean": "DEL target",
+    "dev":"set NODE_ENV=dev&& set DEBUG='my:*' && node target/server.js"
   },
   "repository": {
     "type": "git",
@@ -25,7 +26,12 @@
     "babel-preset-stage-0": "^6.5.0"
   },
   "dependencies": {
+    "body-parser": "^1.15.0",
+    "debug": "^2.2.0",
+    "express": "^4.13.4",
     "mongoose": "^4.4.7",
-    "project-core": "0.0.16"
+    "multiparty": "^4.1.2",
+    "project-core": "0.0.16",
+    "serve-static": "^1.10.2"
   }
 }

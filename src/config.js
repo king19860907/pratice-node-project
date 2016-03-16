@@ -3,7 +3,8 @@
  */
 
 const defaultConfig = function(set,get,has){
-
+    //监听端口
+    set('web.port','3000');
 };
 
 module.exports = defaultConfig;
