@@ -2,10 +2,6 @@
  * Created by jun_ma on 2016/3/15.
  */
 
-/**
- * Created by jun_ma on 2016/3/15.
- */
-
 import mongoose from 'mongoose';
 
 module.exports=function(done){
@@ -16,6 +12,8 @@ module.exports=function(done){
         name:{type:String,unique:true},
         password:String,
         nickname:String,
+        email:{type:String,unique:true},
+        about:{type:String}
     });
 
     $.mongodb.model('User',User);
