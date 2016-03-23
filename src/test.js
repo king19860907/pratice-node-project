@@ -10,7 +10,6 @@
     password:'123456',
     nickname:'雷小锋',
     about:'穷玩车~富腕表~屌丝玩电脑',
-
 },console.log);*/
 
 /*
@@ -20,7 +19,4 @@ $.method('user.get').call({
 },console.log);*/
 
 $.method('user.update').call({
-    name : 'majun',
-    email : '118109840@qq.com',
-    nickname : '雷小锋2',
 },console.log);

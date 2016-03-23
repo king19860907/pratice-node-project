@@ -21,7 +21,7 @@ module.exports = function(done){
             }
         }
         {
-            const user = await $.method('user.get').call({name:params.email});
+            const user = await $.method('user.get').call({email:params.email});
             if(user){
                 return callback(new Error(`user ${params.email} already exists`));
             }

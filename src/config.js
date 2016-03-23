@@ -5,6 +5,7 @@
 const defaultConfig = function(set,get,has){
     //监听端口
     set('web.port','3000');
+    set('web.session.secret','majun');
 };
 
 module.exports = defaultConfig;
