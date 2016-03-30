@@ -24,6 +24,10 @@ $.init.add((done)=>{
     //如果有设置环境变量，则同时也加载环境变量对应的配置文件
     if(env){
         debug('load env: %s',env);
+        const envConfig = require('../config/'+env+'.js');
+        if(typeof envConfig != 'function'){
+            done(new Error(env+'.js is not export a function'));
+        }
         $.config.load(path.resolve(__dirname,'../config',env+'.js'));
     }
     $.env = env;
