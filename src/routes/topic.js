@@ -13,7 +13,7 @@ module.exports = function(done){
 
         const topic = await $.method('topic.add').call(req.body);
 
-        res.json({success:true,topic:topic });
+        res.apiSuccess({topic:topic });
 
     });
 
@@ -22,7 +22,7 @@ module.exports = function(done){
             req.query.tags = req.query.tags.split(',').map(v => v.trim()).filter(v=>v);
         }
         const list = await $.method('topic.list').call(req.query);
-        res.json({success:true,result:list});
+        res.apiSuccess({list});
     });
 
     $.router.get('/api/topic/item/:topic_id',async function (req,res,next){
@@ -32,7 +32,7 @@ module.exports = function(done){
             return next(new Error(`topic ${req.params.topic_id} does not exists`));
         }
 
-        res.json({success:true,topic:topic});
+        res.apiSuccess({topic:topic});
     });
 
     done();
