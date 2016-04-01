@@ -9,6 +9,13 @@ module.exports=function(done){
     const  Schema = mongoose.Schema;
     const  ObjectId = Schema.ObjectId;
 
+    const comment = new Schema({
+        cid:ObjectId,
+        authorId:ObjectId,
+        content:String,
+        createAt:Date,
+    });
+
     const Topic = new Schema({
         authorId:{type:ObjectId,index:true},
         title:{type:String,trim:true},
@@ -16,12 +23,7 @@ module.exports=function(done){
         tags:[{type:String,index:true}],
         createAt:{type:Date,index:true},
         updateAt:{type:Date,index:true},
-        comments:[{
-            cid:ObjectId,
-            authorId:ObjectId,
-            content:String,
-            createAt:Date,
-        }],
+        comments:[comment],
     });
 
     $.mongodb.model('Topic',Topic);

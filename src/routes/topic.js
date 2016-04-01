@@ -50,5 +50,19 @@ module.exports = function(done){
         res.apiSuccess({topic});
     });
 
+    $.router.post('/api/topic/item/:topic_id/comment/add',$.checkLogin,async function(req,res,next){
+        req.body._id = req.params.topic_id;
+        req.body.authorId = req.session.user._id;
+        const comment = await $.method('topic.comment.add').call(req.body);
+        res.apiSuccess({comment:comment});
+    });
+
+    $.router.post('/api/topic/item/:topic_id/comment/delete',$.checkLogin,async function(req,res,next){
+        req.body._id = req.params.topic_id;
+        req.body.authorId = req.session.user._id;
+        const comment = await $.method('topic.comment.delete').call(req.body);
+        res.apiSuccess({comment:comment});
+    });
+
     done();
 }

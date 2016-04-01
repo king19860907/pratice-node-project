@@ -72,5 +72,34 @@ module.exports = function(done){
         return $.model.Topic.update({_id:params._id},{$set:update});
     });
 
+    $.method('topic.comment.add').check({
+        authorId:{require:true,validate:(v)=>validator.isMongoId(v)},
+        content:{require:true},
+    });
+    $.method('topic.comment.add').register(async function (params){
+        const comment = {
+            authorId:params.authorId,
+            content:params.content,
+            createAt:new Date(),
+        };
+        const topic = await $.method('topic.get').call({_id:params._id});
+        topic.comments.push(comment);
+        return topic.save();
+
+    });
+
+    $.method('topic.comment.delete').check({
+        _id:{require:true,validate:(v)=>validator.isMongoId(v)},
+        cid:{require:true,validate:(v)=>validator.isMongoId(v)},
+    });
+    $.method('topic.comment.delete').register(async function (params){
+        return $.model.Topic.update({_id:params._id},{
+            $pull:{
+                'comments.cid':params.cid,
+            }
+        });
+
+    });
+
     done();
 };
