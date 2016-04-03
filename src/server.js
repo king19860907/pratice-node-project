@@ -65,5 +65,5 @@ $.init((err)=>{
     });
     user.save(console.log);*/
 
-    require('./test');
+    //require('./test');
 });

@@ -10,7 +10,6 @@ module.exports=function(done){
     const  ObjectId = Schema.ObjectId;
 
     const comment = new Schema({
-        cid:ObjectId,
         authorId:ObjectId,
         content:String,
         createAt:Date,

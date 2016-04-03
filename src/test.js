@@ -18,5 +18,20 @@ $.method('user.get').call({
     email:'118109840@qq.com',
 },console.log);*/
 
-$.method('user.update').call({
+/*$.method('user.update').call({
+},console.log);*/
+
+
+
+$.method('topic.comment.get').call({
+    _id:'570035336659c38f0473d5a1',
+    cid:'570040722f1adad105e08140',
 },console.log);
+
+
+/*
+$.method('topic.comment.delete').call({
+    _id:'570035336659c38f0473d5a1',
+    cid:'57004133e5da43f305e89c8f',
+},console.log);
+*/
