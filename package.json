@@ -8,7 +8,7 @@
     "watch": "npm run clean && babel src -d target --watch",
     "compile": "npm run clean && babel src -d target",
     "clean": "DEL target",
-    "dev": "set NODE_ENV=dev&& set DEBUG='my:*' && node target/server.js"
+    "dev": "set NODE_ENV=dev&& set DEBUG='my:*' && nodemon target/server.js"
   },
   "repository": {
     "type": "git",
@@ -23,7 +23,8 @@
   "devDependencies": {
     "babel-cli": "^6.6.5",
     "babel-preset-es2015-node4": "^2.0.3",
-    "babel-preset-stage-0": "^6.5.0"
+    "babel-preset-stage-0": "^6.5.0",
+    "nodemon": "^1.9.1"
   },
   "dependencies": {
     "body-parser": "^1.15.0",
