@@ -82,9 +82,15 @@ module.exports = function(done){
             content:params.content,
             createAt:new Date(),
         };
-        const topic = await $.method('topic.get').call({_id:params._id});
+       /* const topic = await $.method('topic.get').call({_id:params._id});
         topic.comments.push(comment);
-        return topic.save();
+        return topic.save();*/
+
+        return $.model.Topic.update({_id:params._id},{
+            $push:{
+              comments: comment
+            },
+        });
 
     });
 
@@ -93,8 +99,14 @@ module.exports = function(done){
         cid:{required:true,validate:(v)=>validator.isMongoId(v)},
     });
     $.method('topic.comment.get').register(async function (params){
-        const topic = await $.method('topic.get').call({_id:params._id});
-        return topic.comments.id(params.cid);
+       /* const topic = await $.method('topic.get').call({_id:params._id});
+        return topic.comments.id(params.cid);*/
+        return $.model.Topic.findOne({
+            _id:params._id,
+            'comments._id':params.cid
+        },{
+            'comments.$':1,
+        })
     });
 
     $.method('topic.comment.delete').check({
@@ -102,15 +114,21 @@ module.exports = function(done){
         cid:{required:true,validate:(v)=>validator.isMongoId(v)},
     });
     $.method('topic.comment.delete').register(async function (params){
-        console.log(params);
-        const topic = await $.method('topic.get').call({_id:params._id});
+       /* const topic = await $.method('topic.get').call({_id:params._id});
         if(topic){
             const comment = topic.comments.id(params.cid);
             if(comment){
                 comment.remove();
             }
         }
-        return topic.save();
+        return topic.save();*/
+        return $.model.Topic.update({_id:params._id},{
+            $pull:{
+                comments:{
+                    _id:params.cid
+                },
+            }
+        });
     });
 
     done();

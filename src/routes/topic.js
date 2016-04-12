@@ -66,13 +66,14 @@ module.exports = function(done){
             return next(new Error('topic dose not exist'));
         }
         const comment = topic.comments.id(req.body.cid);
+        console.log(comment);
         if(!comment){
             return next(new Error('comment dose not exist'));
         }
         if(comment.authorId.toString() !== req.body.authorId.toString() && topic.authorId.toString() !== req.body.authorId.toString()){
             return next(new Error('access denied'));
         }
-        topic = await $.method('topic.comment.delete').call(req.body);
+        topic = await $.method('topic.comme nt.delete').call(req.body);
         res.apiSuccess({topic:topic});
     });
 
