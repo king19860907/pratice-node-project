@@ -10,6 +10,9 @@ import multiparty from 'multiparty';
 import path from 'path';
 import multipart from 'connect-multiparty';
 import session from 'express-session';
+import _RedisStore from 'connect-redis';
+
+const RedisStore = _RedisStore(session);
 
 module.exports=function(done){
     const app = express();
@@ -23,6 +26,7 @@ module.exports=function(done){
         secret: $.config.get('web.session.secret'),
         resave: false,
         saveUninitialized: true,
+        store:new RedisStore($.config.get('web.session.redis')),
     }))
 
     const  router = express.Router();
