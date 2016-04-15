@@ -38,10 +38,10 @@ module.exports = {
         hot: true,
         inline:true,
         historyApiFallback:true,
-        stats:{colors:true}
-       /* proxy:{
+        stats:{colors:true},
+        proxy:{
             '*':'http://127.0.0.1:3001',
-        },*/
+        },
     },
     babel:{
         presets:['react','es2015'],

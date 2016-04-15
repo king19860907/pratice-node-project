@@ -8,6 +8,7 @@
  */
 
 module.exports = function(set,get,has){
+    set('web.port',3001)
     set('db.mongodb','mongodb://10.1.6.210:27001/pratice-node-project');
 };
 //module.exports = 'aaa';
