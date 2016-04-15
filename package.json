@@ -9,7 +9,9 @@
     "compile": "npm run clean && babel src -d target",
     "clean": "DEL target",
     "dev": "set NODE_ENV=dev&& set DEBUG='my:*' && nodemon target/server.js",
-    "fe:compile": "cd frontend && webpack --progress"
+    "fe:compile": "cd frontend && webpack --progress",
+    "fe:watch": "cd frontend && webpack --progress --colors --watch",
+    "fe:dev":"cd frontend && webpack-dev-server"
   },
   "repository": {
     "type": "git",
@@ -28,18 +30,33 @@
     "babel-preset-es2015-node4": "^2.0.3",
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
-    "nodemon": "^1.9.1"
+    "nodemon": "^1.9.1",
+    "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
     "body-parser": "^1.15.0",
+    "bootstrap": "^3.3.6",
+    "bootstrap-webpack": "0.0.5",
     "connect-multiparty": "^2.0.0",
     "connect-redis": "^3.0.2",
+    "css-loader": "^0.23.1",
     "debug": "^2.2.0",
+    "exports-loader": "^0.6.3",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.8.5",
+    " -loader": "^0.6.5",
+    "jquery": "^2.2.3",
+    "less": "^2.6.1",
+    "less-loader": "^2.2.3",
     "mongoose": "^4.4.7",
     "project-core": "^0.1.1",
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1",
     "serve-static": "^1.10.2",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
     "validator": "^5.1.0"
   }
 }

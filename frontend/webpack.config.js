@@ -18,7 +18,26 @@ module.exports = {
                 query: {
                     presets: ['react', 'es2015']
                 }
+            },
+            { test: /\.(woff|woff2)$/,  loader: "url-loader?limit=10000&mimetype=application/font-woff" },
+            { test: /\.ttf$/,    loader: "file-loader" },
+            { test: /\.eot$/,    loader: "file-loader" },
+            { test: /\.svg$/,    loader: "file-loader" },
+            {
+                test: /\/bootstrap\/js\//,
+                loader: 'imports?jQuery=jquery'
             }
         ]
+    },
+    devServer: {
+        contentBase:__dirname,
+        port:3000,
+        hot: true,
+        inline:true,
+        historyApiFallback:true,
+        stats:{colors:true}
+       /* proxy:{
+            '*':'http://127.0.0.1:3001',
+        },*/
     }
 };
