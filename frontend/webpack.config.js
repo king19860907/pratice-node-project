@@ -2,11 +2,17 @@
  * Created by jun_ma on 2016/4/15.
  */
 const  path = require('path');
+const webpack = require('webpack');
 module.exports = {
-    entry: "./entry.js",
+    entry: [
+        'webpack-dev-server/client?http://0.0.0.0:3000',
+        'webpack/hot/only-dev-server',
+        './entry.js',
+    ],
     output: {
-        path: path.resolve(__dirname,'bulid'),
-        filename: "bundle.js"
+        path: path.resolve(__dirname,'build'),
+        filename: "bundle.js",
+        publicPath:'/build/',
     },
     module: {
         loaders: [
@@ -14,10 +20,7 @@ module.exports = {
             {
                 test: /\.jsx?$/,
                 exclude: /(node_modules|bower_components)/,
-                loader: 'babel', // 'babel-loader' is also a legal name to reference
-                query: {
-                    presets: ['react', 'es2015']
-                }
+                loaders: ['react-hot','babel'], // 'babel-loader' is also a legal name to reference
             },
             { test: /\.(woff|woff2)$/,  loader: "url-loader?limit=10000&mimetype=application/font-woff" },
             { test: /\.ttf$/,    loader: "file-loader" },
@@ -39,5 +42,11 @@ module.exports = {
        /* proxy:{
             '*':'http://127.0.0.1:3001',
         },*/
-    }
+    },
+    babel:{
+        presets:['react','es2015'],
+    },
+    plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+    ],
 };
