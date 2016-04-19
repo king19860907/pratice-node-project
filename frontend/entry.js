@@ -5,12 +5,18 @@ window.jQuery = require('jquery');
 require("bootstrap-webpack");
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {Router, Route, Link,browserHistory} from 'react-router'
 import App from './App';
+import TopicDetail from './component/TopicDetail';
 
-import {getTopicList} from './lib/client';
+const e = document.createElement('div');
+e.id = 'app';
+document.body.appendChild(e);
 
-getTopicList({})
-    .then(ret => console.log(ret))
-    .catch(err => console.error(err));
-
-ReactDOM.render(<App/>,document.body);
+ReactDOM.render((
+    <Router history={browserHistory}>
+        <Route path="/" component={App}>
+            <Route path="/topic/:id" component={TopicDetail}/>
+        </Route>
+    </Router>
+),e);
