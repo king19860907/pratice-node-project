@@ -14,7 +14,7 @@ export function request(method,path,data={}){
             method,
             url:`${urlBase}/${path}`,
         };
-        if(method === 'GET' || method === 'POST'){
+        if(method === 'GET' || method === 'HEAD'){
             options.qs = data;
         }else{
             options.form = data;
@@ -45,4 +45,12 @@ export function getTopicList(options){
 
 export function getTopicDetail(id){
     return request('get',`topic/item/${id}`).then(ret=>ret.topic);
+}
+
+export function login(name,password){
+    return request('post','login',{name,password});
+}
+
+export function loginUser(){
+    return request('get','login_user').then(ret=>ret.user);
 }

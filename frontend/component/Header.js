@@ -4,8 +4,21 @@
 
 import React from 'react';
 import {Link} from 'react-router'
+import {loginUser} from '../lib/client';
 
 export default class  Header extends React.Component{
+
+    constructor(props){
+        super(props);
+        this.state={};
+    }
+
+    componentDidMount(){
+        loginUser()
+            .then(user => this.setState({user}))
+            .catch(err => console.error(err));
+    }
+
     render(){
         return(
             <nav className="navbar navbar-default">
@@ -25,6 +38,15 @@ export default class  Header extends React.Component{
                                 <Link to="/">首页</Link>
                             </li>
                             <li><a href="/new"><i className="glyphicon glyphicon-plus"></i> 发帖</a></li>
+                        </ul>
+                        <ul className="nav navbar-nav navbar-right">
+                            {
+                                this.state.user ? (
+                                    <li><a href="/logout">注销 [{this.state.user.nickname}]</a></li>
+                                ) : (
+                                    <li><a href="/login">登录</a></li>
+                                )
+                            }
                         </ul>
                     </div>
                 </div>
