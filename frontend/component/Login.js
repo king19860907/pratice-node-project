@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 import {login} from '../lib/client';
 import jQuery from 'jquery';
+import {redirectUrl} from '../lib/utils';
 
 export default class Login extends React.Component{
 
@@ -20,7 +21,7 @@ export default class Login extends React.Component{
         login(this.state.name,this.state.password)
             .then(ret => {
                 $btn.button('reset');
-                location.replace('/');
+                redirectUrl('/');
             })
             .catch(err => {
                 alert(err);
