@@ -20,7 +20,7 @@ export default class Login extends React.Component{
         login(this.state.name,this.state.password)
             .then(ret => {
                 $btn.button('reset');
-                console.log(ret);
+                location.replace('/');
             })
             .catch(err => {
                 alert(err);

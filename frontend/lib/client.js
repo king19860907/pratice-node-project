@@ -40,7 +40,7 @@ export function request(method,path,data={}){
 }
 
 export function getTopicList(options){
-    return request('get','topic/list',{});
+    return request('get','topic/list',{});z
 }
 
 export function getTopicDetail(id){
@@ -53,4 +53,8 @@ export function login(name,password){
 
 export function loginUser(){
     return request('get','login_user').then(ret=>ret.user);
+}
+
+export function logout(){
+    return request('post','logout');
 }
