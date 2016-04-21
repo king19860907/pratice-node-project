@@ -60,6 +60,7 @@
     "url-loader": "^0.5.7",
     "validator": "^5.1.0",
     "browser-request": "^0.3.3",
-    "react-router": "^2.2.2"
+    "react-router": "^2.2.2",
+    "marked": "^0.3.5"
   }
 }
