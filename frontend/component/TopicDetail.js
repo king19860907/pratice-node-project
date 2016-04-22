@@ -5,6 +5,7 @@
 import React from 'react';
 import {getTopicDetail} from '../lib/client';
 import {renderMarkdown} from '../lib/utils';
+import 'highlight.js/styles/darkula.css';
 
 export default class  TopicDetail extends React.Component{
 
