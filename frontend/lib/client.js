@@ -62,3 +62,7 @@ export function logout(){
 export function addTopic(title,content,tags){
     return request('post','topic/add',{title,content,tags}).then(ret => ret.topic);
 }
+
+export function updateTopic(id, title, content, tags){
+    return request('post',`topic/item/${id}`,{title,content,tags}).then(ret => ret.topic);
+}

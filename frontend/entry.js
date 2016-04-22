@@ -10,6 +10,7 @@ import App from './App';
 import TopicDetail from './component/TopicDetail';
 import Login from './component/Login';
 import NewTopic from './component/NewTopic';
+import EditTopic from './component/EditTopic';
 
 const e = document.createElement('div');
 e.id = 'app';
@@ -21,6 +22,7 @@ ReactDOM.render((
             <Route path="/topic/:id" component={TopicDetail}/>
             <Route path="new" component={NewTopic}/>
             <Route path="/login" component={Login}/>
+            <Route path="/topic/:id/edit" component={EditTopic}/>
         </Route>
     </Router>
 ),e);
