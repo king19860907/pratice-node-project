@@ -66,3 +66,7 @@ export function addTopic(title,content,tags){
 export function updateTopic(id, title, content, tags){
     return request('post',`topic/item/${id}`,{title,content,tags}).then(ret => ret.topic);
 }
+
+export function addComment(id,content){
+    return request('post',`topic/item/${id}/comment/add`,{content}).then(ret => ret.comment);
+}

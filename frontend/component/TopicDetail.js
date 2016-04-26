@@ -3,11 +3,12 @@
  */
 
 import React from 'react';
-import {getTopicDetail} from '../lib/client';
+import {getTopicDetail,addComment} from '../lib/client';
 import {loginUser} from '../lib/client';
 import {renderMarkdown} from '../lib/utils';
 import 'highlight.js/styles/darkula.css';
-import {Link} from 'react-router'
+import {Link} from 'react-router';
+import CommentEditor from './CommentEditor';
 
 export default class  TopicDetail extends React.Component{
 
@@ -16,11 +17,16 @@ export default class  TopicDetail extends React.Component{
         this.state={};
     }
 
-    componentDidMount(){
+    refresh(){
         getTopicDetail(this.props.params.id)
             .then(
                 topic => {
                     topic.html = renderMarkdown(topic.content);
+                    if(topic.comments){
+                        for(const item of topic.comments){
+                            item.html = renderMarkdown(item.content);
+                        }
+                    }
                     this.setState({topic});
                 }
             )
@@ -29,6 +35,10 @@ export default class  TopicDetail extends React.Component{
         loginUser()
             .then(user => this.setState({user}))
             .catch(err => console.error(err));
+    }
+
+    componentDidMount(){
+        this.refresh();
     }
 
     render(){
@@ -52,12 +62,29 @@ export default class  TopicDetail extends React.Component{
                     }
                 </h2>
                 <section dangerouslySetInnerHTML={{__html: topic.html}}></section>
+                <CommentEditor
+                    title="发表评论"
+                    onSave={
+                        (comment,done) => {
+                            addComment(this.state.topic._id,comment.content)
+                                .then(comment => {
+                                   done();
+                                   this.refresh();
+                                })
+                                .catch(err => {
+                                    done();
+                                    alert(err);
+                                })
+                        }
+                    }
+                />
                 <ul className="list-group">
                     {
                         topic.comments.map((item,i)=>{
                            return (
                                <li className="list-group-item" key={i}>
-                                   {item.authorId}于{item.createAt}说：<br/>{item.content}
+                                   {item.authorId}于{item.createAt}说：
+                                   <p dangerouslySetInnerHTML={{__html: item.html}}></p>
                                </li>
                            )
                         })
