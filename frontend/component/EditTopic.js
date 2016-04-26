@@ -7,6 +7,7 @@ import jQuery from 'jquery';
 import {redirectUrl} from '../lib/utils';
 import {getTopicDetail} from '../lib/client';
 import {updateTopic} from '../lib/client';
+import MarkdownEditor from './MarkdownEditor';
 
 export default class  EditTopic extends React.Component{
 
@@ -67,8 +68,7 @@ export default class  EditTopic extends React.Component{
                         </div>
                         <div className="form-group">
                             <label htmlFor="ipt-content">内容</label>
-                            <textarea defaultValue={topic.content} className="form-control" id="ipt-content" rows="10" onChange={this.handleChange.bind(this, 'content')} placeholder="">
-                            </textarea>
+                            <MarkdownEditor value={topic.content} onChange={this.handleChange.bind(this,'content')}/>
                         </div>
                         <button type="button" className="btn btn-primary" onClick={this.handleSubmit.bind(this)}>保存</button>
                     </form>
