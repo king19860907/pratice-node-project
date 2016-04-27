@@ -28,6 +28,8 @@ module.exports = function(done){
 
     $.router.post('/api/signup',async function(req,res,next){
         const user = await $.method('user.add').call(req.body);
+        req.session.user = user;
+        req.session.logout_token = $.utils.randomString(20);
         res.apiSuccess({user:user});
     });
 
