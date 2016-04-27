@@ -13,6 +13,7 @@ module.exports=function(done){
         authorId:ObjectId,
         content:String,
         createAt:Date,
+        nickname:{type:String,trim:true},
     });
 
     const Topic = new Schema({

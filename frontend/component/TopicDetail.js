@@ -103,7 +103,7 @@ export default class  TopicDetail extends React.Component{
                                            <i className="glyphicon glyphicon-trash" onClick={this.handleDeleteComment.bind(this,item._id)}/>
                                        </button>
                                    </span>
-                                   {item.authorId}于{item.createAt}说：
+                                   {item.nickname}于{item.createAt}说：
                                    <p dangerouslySetInnerHTML={{__html: item.html}}></p>
                                </li>
                            )

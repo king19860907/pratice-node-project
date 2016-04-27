@@ -27,7 +27,10 @@ module.exports = function(done){
 
     $.router.get('/api/topic/item/:topic_id',async function (req,res,next){
         const topic = await $.method('topic.get').call({_id:req.params.topic_id});
-        console.log('topic:'+topic);
+        for(const comment of topic.comments){
+            const  user = await $.method('user.get').call({_id:comment.authorId.toString()});
+            comment.nickname = user.nickname;
+        }
         if(!topic){
             return next(new Error(`topic ${req.params.topic_id} does not exists`));
         }
