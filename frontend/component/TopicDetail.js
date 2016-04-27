@@ -62,22 +62,26 @@ export default class  TopicDetail extends React.Component{
                     }
                 </h2>
                 <section dangerouslySetInnerHTML={{__html: topic.html}}></section>
-                <CommentEditor
-                    title="发表评论"
-                    onSave={
-                        (comment,done) => {
-                            addComment(this.state.topic._id,comment.content)
-                                .then(comment => {
-                                   done();
-                                   this.refresh();
-                                })
-                                .catch(err => {
-                                    done();
-                                    alert(err);
-                                })
-                        }
-                    }
-                />
+                {
+                    user ? (
+                        <CommentEditor
+                            title="发表评论"
+                            onSave={
+                                (comment,done) => {
+                                    addComment(this.state.topic._id,comment.content)
+                                        .then(comment => {
+                                           done();
+                                           this.refresh();
+                                        })
+                                        .catch(err => {
+                                            done();
+                                            alert(err);
+                                        })
+                                }
+                            }
+                        />
+                    ):(<div></div>)
+                }
                 <ul className="list-group">
                     {
                         topic.comments.map((item,i)=>{
