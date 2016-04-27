@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import {getTopicDetail,addComment} from '../lib/client';
+import {getTopicDetail,addComment,deleteComment} from '../lib/client';
 import {loginUser} from '../lib/client';
 import {renderMarkdown} from '../lib/utils';
 import 'highlight.js/styles/darkula.css';
@@ -39,6 +39,17 @@ export default class  TopicDetail extends React.Component{
 
     componentDidMount(){
         this.refresh();
+    }
+
+    handleDeleteComment(cid){
+        if(!confirm('是否删除该评论？')) return;
+        deleteComment(this.state.topic._id,cid)
+            .then(comment => {
+                this.refresh();
+            })
+            .catch(err => {
+                alert(err);
+            });
     }
 
     render(){
@@ -87,6 +98,11 @@ export default class  TopicDetail extends React.Component{
                         topic.comments.map((item,i)=>{
                            return (
                                <li className="list-group-item" key={i}>
+                                   <span className="pull-right">
+                                       <button className="btn btn-xs btn-danger">
+                                           <i className="glyphicon glyphicon-trash" onClick={this.handleDeleteComment.bind(this,item._id)}/>
+                                       </button>
+                                   </span>
                                    {item.authorId}于{item.createAt}说：
                                    <p dangerouslySetInnerHTML={{__html: item.html}}></p>
                                </li>

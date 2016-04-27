@@ -57,7 +57,7 @@ module.exports = function(done){
         res.apiSuccess({comment:comment});
     });
 
-    $.router.delete('/api/topic/item/:topic_id/comment/delete',$.checkLogin,async function(req,res,next){
+    $.router.post('/api/topic/item/:topic_id/comment/delete',$.checkLogin,async function(req,res,next){
         req.body._id = req.params.topic_id;
         req.body.authorId = req.session.user._id;
 
@@ -66,14 +66,13 @@ module.exports = function(done){
             return next(new Error('topic dose not exist'));
         }
         const comment = topic.comments.id(req.body.cid);
-        console.log(comment);
         if(!comment){
             return next(new Error('comment dose not exist'));
         }
         if(comment.authorId.toString() !== req.body.authorId.toString() && topic.authorId.toString() !== req.body.authorId.toString()){
             return next(new Error('access denied'));
         }
-        topic = await $.method('topic.comme nt.delete').call(req.body);
+        topic = await $.method('topic.comment.delete').call(req.body);
         res.apiSuccess({topic:topic});
     });
 

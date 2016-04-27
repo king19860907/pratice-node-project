@@ -70,3 +70,7 @@ export function updateTopic(id, title, content, tags){
 export function addComment(id,content){
     return request('post',`topic/item/${id}/comment/add`,{content}).then(ret => ret.comment);
 }
+
+export function deleteComment(id,cid){
+    return request('post',`topic/item/${id}/comment/delete`,{cid});
+}
